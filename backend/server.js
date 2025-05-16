@@ -28,30 +28,20 @@ const applicantRoutes = require('./routes/applicantRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const authRoutes = require('./routes/auth');
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
+  // 1) serve all files under client/frontend/build
+  app.use(
+    express.static(
+      path.join(__dirname, '../client/frontend/build')
+    )
+  );
 
+  // 2) for any other route, send back index.html
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    res.sendFile(
+      path.join(__dirname, '../client/frontend/build', 'index.html')
+    );
   });
 }
-// Serve the React frontend from client/frontend/build
-+  app.use(
-+    express.static(
-+      path.join(__dirname, '../client/frontend/build')
-+    )
-+  );
-+
-+  // Always return index.html for any unknown paths
-+  app.get('*', (req, res) => {
-+    res.sendFile(
-+      path.join(
-+        __dirname,
-+        '../client/frontend/build',
-+        'index.html'
-+      )
-+    );
-+  });
- }
 
 // Use Routes
 app.use("/api/auth", authRoutes);
