@@ -51,7 +51,7 @@ router.post('/login', asyncHandler(async (req, res) => {
 }));
 
 // Profile Route - protected
-router.get('/profile', protect, asyncHandler(async (req, res) => {
+router.get('/profile', protect,  asyncHandler(async (req, res) => {
   // req.user populated by protect middleware
   res.json(req.user);
 }));

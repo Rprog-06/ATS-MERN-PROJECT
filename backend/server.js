@@ -18,22 +18,26 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
+app.get('/api/message', (req, res) => {
+  res.json({ message: 'Hello from the backend!' });
+});
 
 // Routes
 const userRoutes = require('./routes/userRoutes');
 const applicantRoutes = require('./routes/applicantRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const authRoutes = require('./routes/auth');
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, '../client/build')));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-  });
-}
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+//   });
+// }
 // Use Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/user", userRoutes);              // ✅ Only one for user
+app.use("/api/user", userRoutes); 
+             // ✅ Only one for user
 app.use("/api/applications", applicantRoutes);    // ✅ Only one for applicants
 app.use("/api/jobs", jobRoutes);
 
@@ -41,9 +45,7 @@ app.use("/api/jobs", jobRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Test route
-app.get('/api/message', (req, res) => {
-  res.json({ message: 'Hello from the backend!' });
-});
+
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/atsDB', {
