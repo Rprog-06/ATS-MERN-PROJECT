@@ -27,13 +27,13 @@ const userRoutes = require('./routes/userRoutes');
 const applicantRoutes = require('./routes/applicantRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const authRoutes = require('./routes/auth');
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static(path.join(__dirname, '../client/build')));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
 
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-//   });
-// }
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
+}
 // Use Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes); 
