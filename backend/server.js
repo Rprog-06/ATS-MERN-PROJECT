@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
-
+const fs=require('fs')
 console.log('🛠 server.js loaded');
 console.log('✅ .env loaded:', process.env.MONGO_URI);
 
@@ -27,18 +27,19 @@ const userRoutes = require('./routes/userRoutes');
 const applicantRoutes = require('./routes/applicantRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const authRoutes = require('./routes/auth');
+const buildDir=path.join(_dirname,'../client/frontend/build')
+console.log("Checking build directory",buildDir)
+console.log("build exists?",fs.existsSync(buildDir));
 if (process.env.NODE_ENV === 'production') {
   // 1) serve all files under client/frontend/build
   app.use(
-    express.static(
-      path.join(__dirname, '../client/frontend/build')
-    )
-  );
+    express.static(buildDir)
+    );
 
   // 2) for any other route, send back index.html
   app.get('*', (req, res) => {
     res.sendFile(
-      path.join(__dirname, '../client/frontend/build', 'index.html')
+      path.join((buildDir,'index.html')
     );
   });
 }
