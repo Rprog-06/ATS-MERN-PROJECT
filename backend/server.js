@@ -2,12 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-const connectDB = require('./config/db');
+//const connectDB = require('./config/db');
 require('dotenv').config();
 //const fs=require('fs')
 console.log('🛠 server.js loaded');
 console.log('✅ .env loaded:', process.env.MONGO_URI);
-connectDB();
+//connectDB();
 const app = express();
 
 // Middlewares
