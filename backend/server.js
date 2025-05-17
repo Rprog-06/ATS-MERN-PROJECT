@@ -19,7 +19,7 @@ const app = express();
 app.use(cors({ origin: https://frontend-4q51.vercel.app/ ,  credentials: true, }));
 
 app.use(express.json());
-app.get('/api/message', (req, res) => {
+app.get('/message', (req, res) => {
   res.json({ message: 'Hello from the backend!' });
 });
 
