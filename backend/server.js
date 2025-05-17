@@ -27,20 +27,18 @@ const userRoutes = require('./routes/userRoutes');
 const applicantRoutes = require('./routes/applicantRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const authRoutes = require('./routes/auth');
-const buildDir=path.join(_dirname,'../client/frontend/build')
-console.log("Checking build directory",buildDir)
-console.log("build exists?",fs.existsSync(buildDir));
-if (process.env.NODE_ENV === 'production') {
-  // 1) serve all files under client/frontend/build
-  app.use(
-    express.static(buildDir)
-    );
 
-  // 2) for any other route, send back index.html
+const buildDir = path.join(__dirname, '../client/frontend/build');
+console.log("Checking build directory", buildDir);
+console.log("build exists?", fs.existsSync(buildDir));
+
+if (process.env.NODE_ENV === 'production') {
+  // 1) Serve static files
+  app.use(express.static(buildDir));
+
+  // 2) For any other route, serve index.html
   app.get('*', (req, res) => {
-    res.sendFile(
-      path.join((buildDir,'index.html')
-    );
+    res.sendFile(path.join(buildDir, 'index.html'));
   });
 }
 
