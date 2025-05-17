@@ -2,11 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const connectDB = require('./config/db');
 require('dotenv').config();
-const fs=require('fs')
+//const fs=require('fs')
 console.log('🛠 server.js loaded');
 console.log('✅ .env loaded:', process.env.MONGO_URI);
-
+connectDB();
 const app = express();
 
 // Middlewares
@@ -15,7 +16,7 @@ const app = express();
 //   credentials: true,
 // };
 
-app.use(cors());
+app.use(cors({ origin: process.env.FRONTEND_URL }));
 
 app.use(express.json());
 app.get('/api/message', (req, res) => {
@@ -28,19 +29,19 @@ const applicantRoutes = require('./routes/applicantRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const authRoutes = require('./routes/auth');
 
-const buildDir = path.join(__dirname, '../client/frontend/build');
-console.log("Checking build directory", buildDir);
-console.log("build exists?", fs.existsSync(buildDir));
+// const buildDir = path.join(__dirname, '../client/frontend/build');
+// console.log("Checking build directory", buildDir);
+// console.log("build exists?", fs.existsSync(buildDir));
 
-if (process.env.NODE_ENV === 'production') {
-  // 1) Serve static files
-  app.use(express.static(buildDir));
+// if (process.env.NODE_ENV === 'production') {
+//   // 1) Serve static files
+//   app.use(express.static(buildDir));
 
-  // 2) For any other route, serve index.html
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(buildDir, 'index.html'));
-  });
-}
+//   // 2) For any other route, serve index.html
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.join(buildDir, 'index.html'));
+//   });
+// }
 
 // Use Routes
 app.use("/api/auth", authRoutes);
