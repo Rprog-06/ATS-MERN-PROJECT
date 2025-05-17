@@ -19,8 +19,8 @@ const app = express();
 app.use(cors({ origin: "https://frontend-4q51.vercel.app" ,  credentials: true, }));
 
 app.use(express.json());
-app.get('/message', (req, res) => {
-  res.json({ message: 'Hello from the backend!' });
+app.get('/', (req, res) => {
+  res.send('Hello from the backend!');
 });
 
 // Routes
