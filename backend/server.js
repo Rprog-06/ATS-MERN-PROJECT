@@ -16,7 +16,7 @@ const app = express();
 //   credentials: true,
 // };
 
-app.use(cors({ origin: process.env.FRONTEND_URL }));
+app.use(cors({ origin: https://frontend-4q51.vercel.app/ ,  credentials: true, }));
 
 app.use(express.json());
 app.get('/api/message', (req, res) => {
