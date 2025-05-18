@@ -52,6 +52,7 @@ app.use("/api/jobs", jobRoutes);
 
 // Static folder for resume uploads
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+//app.use('/uploads', express.static('uploads'));
 
 // Test route
 

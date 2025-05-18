@@ -31,8 +31,9 @@ router.post('/apply/:jobId',protect, authorizeRoles("applicant"),  async (req, r
 });
 
 // Get all applications for a job
-router.get('/job/:jobId/applicants', async (req, res) => {
+router.get('/job/:jobId', async (req, res) => {
   try {
+    
     const applicants = await Applicant.find({ job: req.params.jobId }).populate('user');
     res.json(applicants);
   } catch (error) {
@@ -56,7 +57,7 @@ router.post("/apply", protect, upload.single("resume"), async (req, res) => {
       marks12,
       gradMarks,
       coverLetter,
-      resume: req.file ? req.file.path : null,
+     resume: req.file ? `/uploads/resumes/${req.file.filename}` : null,
     });
 
     await newApplication.save();
@@ -66,4 +67,54 @@ router.post("/apply", protect, upload.single("resume"), async (req, res) => {
     res.status(500).json({ message: "Server error while applying." });
   }
 });
+// Add this new route just before module.exports = router;
+router.get("/recruiter/applications", protect, async (req, res) => {
+  try {
+    const recruiterId = req.user._id; // Logged-in recruiter
+
+    // Find all jobs posted by this recruiter
+    const recruiterJobs = await Job.find({ postedBy: recruiterId });
+    const jobIds = recruiterJobs.map((job) => job._id);
+
+    // Find all applications for these jobs
+    const applications = await Applicant.find({ job: { $in: jobIds } })
+      .populate("user", "name email") // Applicant info
+      .populate("job", "title");      // Job title
+
+    res.status(200).json(applications);
+  } catch (error) {
+    console.error("❌ Error fetching recruiter applications:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+router.get("/recruiter", protect, authorizeRoles("applicant"), async (req, res) => {
+  try {
+    const applications = await Applicant.find({ user: req.user._id })
+      .populate("job", "title location postedBy createdAt");
+
+    res.status(200).json(applications);
+  } catch (error) {
+    console.error("Error fetching user's applications:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+router.patch("/update-status/:appId", protect, authorizeRoles("recruiter"), async (req, res) => {
+  const { appId } = req.params;
+  const { status } = req.body;
+
+  try {
+    const application = await Applicant.findById(appId);
+    if (!application) return res.status(404).json({ message: "Application not found" });
+
+    application.applicationStatus = status;
+    await application.save();
+
+    res.status(200).json({ message: "Status updated", application });
+  } catch (error) {
+    console.error("Error updating status:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 module.exports = router;

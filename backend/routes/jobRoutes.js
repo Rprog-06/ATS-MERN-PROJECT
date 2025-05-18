@@ -5,11 +5,13 @@ const { getJobsByRecruiter } = require("../controllers/jobController");
 const router = express.Router();
 
 // Create new job posting
-router.post('/post', async (req, res) => {
+router.post('/post', protect,async (req, res) => {
   const { title, company, description, requirements, salary, location } = req.body;
 
+
   try {
-    const newJob = new Job({ title, company, description, requirements, salary, location });
+    const newJob = new Job({ title, company, description, requirements, salary, location, createdBy: req.user._id, });
+   
     await newJob.save();
     res.status(201).json({ message: 'Job posted', job: newJob });
   } catch (error) {
@@ -26,6 +28,9 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-router.get("/recruiter", protect, getJobsByRecruiter);
+router.get("/recruiter", protect, async (req, res) => {
+  const jobs = await Job.find({ createdBy: req.user._id });
+  res.json(jobs);
+});
 
 module.exports = router;
