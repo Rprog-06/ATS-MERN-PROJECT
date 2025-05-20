@@ -1,7 +1,7 @@
 // src/components/JobPostings.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-//import API from "../api/axiosInstance";
+import API from "../api/axiosInstance";
 
 const JobPostings = () => {
   const [jobPostings, setJobPostings] = useState([]);
