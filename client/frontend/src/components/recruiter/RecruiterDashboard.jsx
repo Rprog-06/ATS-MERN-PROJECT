@@ -9,7 +9,7 @@ const RecruiterDashboard = () => {
     const fetchJobs = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await API.get("/jobs/recruiter", {
+        const res = await API.get("/api/jobs/recruiter", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setJobs(res.data);
