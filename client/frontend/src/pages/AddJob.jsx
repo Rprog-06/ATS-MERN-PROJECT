@@ -23,7 +23,7 @@ const AddJob = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-     await API.post("/jobs/post", form, {
+     await API.post("/api/jobs/post", form, {
 
         headers: { Authorization: `Bearer ${token}` },
       });
