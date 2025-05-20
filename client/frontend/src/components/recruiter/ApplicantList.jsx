@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import API from "../../api";
-//import API from "../api/axiosInstance";
+// import API from "../../api";
+import API from "../api/axiosInstance";
 const ApplicantsList = () => {
   const { jobId } = useParams();
   const [applicants, setApplicants] = useState([]);
