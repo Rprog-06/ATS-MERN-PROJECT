@@ -17,14 +17,14 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const res = await API.post("/api/auth/login", formData);
-      localStorage.setItem("token", res.data.token);
+    //  localStorage.setItem("token", res.data.token);
        const { token, user } = res.data;
 
       // ✅ Save token and role to localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("user.role", user.role); 
       alert("Login successful");
-      navigate("/dashboard");
+      navigate("/Dashboard");
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
     }
