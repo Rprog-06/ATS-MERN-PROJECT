@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../api/axiosInstance"
 
 const ViewJobs = () => {
   const [jobs, setJobs] = useState([]);
-   const role = localStorage.getItem("user.role");
+  const role = localStorage.getItem("user.role");
   const navigate = useNavigate();
 
   useEffect(() => {
-     fetch("/api/jobs")
-      .then((res) => res.json())
-      .then((data) => setJobs(data))
-      .catch(console.error);
+    const fetchJobs = async () => {
+      try {
+        const res = await API.get("/api/jobs");
+        setJobs(res.data);
+      } catch (err) {
+        console.error("Failed to fetch jobs", err);
+        alert("Failed to load jobs.");
+      }
+    };
+
+    fetchJobs();
   }, []);
+
   const handleApply = (jobId) => {
-    // Navigate to application form with jobId param
     navigate(`/apply/${jobId}`);
   };
-
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <h2 className="text-2xl font-bold text-center mb-6">All Posted Jobs</h2>
