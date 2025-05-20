@@ -10,7 +10,7 @@ const ApplicantsList = () => {
     const fetchApplicants = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await API.get(`/applications/job/${jobId}`, {
+        const res = await API.get(`/api/applications/job/${jobId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setApplicants(res.data);
