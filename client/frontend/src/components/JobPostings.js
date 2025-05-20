@@ -9,7 +9,7 @@ const JobPostings = () => {
   useEffect(() => {
     const fetchJobPostings = async () => {
       try {
-        const response = await API.get('http://localhost:5000/api/jobPostings');
+        const response = await API.get('/api/jobPostings');
         setJobPostings(response.data);
       } catch (error) {
         console.error("There was an error fetching the job postings", error);
