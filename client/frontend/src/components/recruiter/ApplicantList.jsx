@@ -28,7 +28,7 @@ const ApplicantsList = () => {
       try {
         const token = localStorage.getItem("token");
         await API.patch(
-          `/applications/update-status/${appId}`,
+          `/api/applications/update-status/${appId}`,
           { status: newStatus },
           { headers: { Authorization: `Bearer ${token}` } }
         );
