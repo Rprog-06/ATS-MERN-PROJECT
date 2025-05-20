@@ -37,7 +37,7 @@ const ApplyForm = () => {
       }
       data.append("jobId", jobId);
 
-      await API.post("/applications/apply", data, {
+      await API.post("/api/applications/apply", data, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
