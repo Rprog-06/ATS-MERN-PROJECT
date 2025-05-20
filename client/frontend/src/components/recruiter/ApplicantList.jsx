@@ -32,6 +32,7 @@ const ApplicantsList = () => {
           { status: newStatus },
           { headers: { Authorization: `Bearer ${token}` } }
         );
+         fetchApplicants();
         // Refresh after update
       } catch (error) {
         console.error("Failed to update status", error);
