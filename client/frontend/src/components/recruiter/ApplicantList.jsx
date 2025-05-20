@@ -68,7 +68,7 @@ const ApplicantsList = () => {
                 <td className="p-2 border">{app.gradMarks}</td>
                 <td className="p-2 border">
                   <a
-                    href={`/api${app.resume}`}
+                    href={`https://ats-mern-project-2.onrender.com${app.resume}`}
                     target="_blank"
                     
                     rel="noopener noreferrer"
