@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import API from "../api";
+// import API from "../api";
 import { motion } from "framer-motion";
-
+import API from "../api/axiosInstance";
 const RecruiterApplicants = () => {
   const [applicants, setApplicants] = useState([]);
 
