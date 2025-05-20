@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import API from "../api";
-//import API from "../api/axiosInstance";
+// import API from "../api";
+import API from "../api/axiosInstance";
 const ApplyForm = () => {
   const { jobId } = useParams();
   const navigate = useNavigate();
