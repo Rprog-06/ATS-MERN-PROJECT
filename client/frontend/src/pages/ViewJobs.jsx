@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import api from "../api/axiosInstance"
+import API from "../api/axiosInstance"
 
 const ViewJobs = () => {
   const [jobs, setJobs] = useState([]);
