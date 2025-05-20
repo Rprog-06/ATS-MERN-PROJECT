@@ -1,7 +1,7 @@
 // src/components/Applications.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
 import API from "../api/axiosInstance";
 // import API from "../api"; // Adjust the path as necessary
 const Applications = () => {
