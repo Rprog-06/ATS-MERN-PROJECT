@@ -44,6 +44,8 @@ function App() {
         />
         {/* Add a route for the applicants list */} 
 <Route path="/recruiter/Applicants/:jobId" element={<ApplicantsList />} />
+{/* <Route path="/Applications" element={<Applications />} /> */}
+
       </Routes>
      
     </Router>

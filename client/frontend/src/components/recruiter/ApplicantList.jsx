@@ -6,7 +6,7 @@ const ApplicantsList = () => {
   const { jobId } = useParams();
   const [applicants, setApplicants] = useState([]);
 
-  useEffect(() => {
+ 
     const fetchApplicants = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -19,9 +19,25 @@ const ApplicantsList = () => {
         alert("Failed to fetch applicants");
       }
     };
+   
+  
+  useEffect(() => {
     fetchApplicants();
-  }, [jobId]);
-
+  },[jobId]);
+   const handleStatusChange = async (appId, newStatus) => {
+      try {
+        const token = localStorage.getItem("token");
+        await API.patch(
+          `/applications/update-status/${appId}`,
+          { status: newStatus },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        // Refresh after update
+      } catch (error) {
+        console.error("Failed to update status", error);
+      }
+    };
+  
   return (
     <div className="max-w-5xl mx-auto bg-white p-6 rounded shadow">
       <h2 className="text-3xl font-bold text-indigo-700 mb-6">Job Applicants</h2>
@@ -61,7 +77,20 @@ const ApplicantsList = () => {
                     View
                   </a>
                 </td>
-                <td className="p-2 border capitalize">{app.applicationStatus}</td>
+               <td>
+  <select
+    value={app.applicationStatus}
+    onChange={(e) => handleStatusChange(app._id, e.target.value)}
+    className="border border-gray-300 rounded px-2 py-1"
+  >
+    {["applied", "under review", "interview scheduled", "hired", "rejected"].map((status) => (
+      <option key={status} value={status}>
+        {status.charAt(0).toUpperCase() + status.slice(1)}
+      </option>
+    ))}
+  </select>
+</td>
+
               </tr>
             ))}
           </tbody>
