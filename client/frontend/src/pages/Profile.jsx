@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import API from "../api"; // Adjust the import based on your file structure
-//import API from "../api/axiosInstance";
+// import API from "../api"; // Adjust the import based on your file structure
+import API from "../api/axiosInstance";
 const Profile = () => {
   const [user, setUser] = useState(null);
 
