@@ -12,7 +12,7 @@ const Applications = () => {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const response = await API.get('/Applications');
+        const response = await API.get('api/Applications');
         setApplications(response.data);
       } catch (error) {
         console.error("There was an error fetching the applications", error);
