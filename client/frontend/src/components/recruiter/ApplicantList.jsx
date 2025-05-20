@@ -68,7 +68,7 @@ const ApplicantsList = () => {
                 <td className="p-2 border">{app.gradMarks}</td>
                 <td className="p-2 border">
                   <a
-                    href={`http://localhost:5000${app.resume}`}
+                    href={`/api${app.resume}`}
                     target="_blank"
                     
                     rel="noopener noreferrer"
