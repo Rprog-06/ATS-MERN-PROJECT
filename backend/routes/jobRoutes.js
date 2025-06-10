@@ -1,7 +1,7 @@
 const express = require('express');
 const Job = require('../models/Job');
 const {protect }= require('../middleware/authMiddleware');
-const { getJobsByRecruiter } = require("../controllers/jobController");
+const { authorizeRoles } = require("../middleware/roleMiddleware");
 const router = express.Router();
 
 // Create new job posting
@@ -32,5 +32,16 @@ router.get("/recruiter", protect, async (req, res) => {
   const jobs = await Job.find({ createdBy: req.user._id });
   res.json(jobs);
 });
+router.delete("/:id", protect, authorizeRoles("recruiter"), async (req, res) => {
+  try {
+    const job = await Job.findById(req.params.id);
+    if (!job) return res.status(404).json({ message: "Job not found" });
 
+    await job.deleteOne();
+    res.status(200).json({ message: "Job deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting job:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 module.exports = router;

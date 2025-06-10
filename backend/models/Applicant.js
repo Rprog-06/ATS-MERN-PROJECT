@@ -36,7 +36,18 @@ const applicantSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
-  },
+    interview: {
+      date: Date,
+      time: String,
+      mode:{
+        type: String,
+        enum: ['Online', 'In-person'],
+        default: 'Online',
+      },
+      linkOrLocation: String, // Link for online interviews or location for in-person
+      } // e.g., "10:00 AM"
+    },
+  
   { timestamps: true }
 );
 

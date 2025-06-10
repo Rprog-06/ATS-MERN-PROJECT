@@ -6,7 +6,7 @@ const JobSchema = new mongoose.Schema({
   location: String,
   jobType: { type: String, default: 'full-time' },
   description: String,
-  requirements: String,
+  requirements:{ type:[String],default: [] }, // Array of strings for requirements
   salary: String,
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // if using auth
 }, { timestamps: true });

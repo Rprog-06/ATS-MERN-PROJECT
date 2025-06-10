@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const appRoutes = require("./routes/applicantRoutes");
 //const connectDB = require('./config/db');
 require('dotenv').config();
 //const fs=require('fs')
@@ -42,7 +43,7 @@ const authRoutes = require('./routes/auth');
 //     res.sendFile(path.join(buildDir, 'index.html'));
 //   });
 // }
-
+app.use("/api", appRoutes);
 // Use Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes); 
