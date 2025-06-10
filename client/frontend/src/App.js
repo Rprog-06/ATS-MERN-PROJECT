@@ -14,8 +14,13 @@ import ApplyForm from "./components/ApplyForm";
 import JobApplications from "./components/JobApplications";
 import RecruiterDashboard from "./components/recruiter/RecruiterDashboard";
 import ApplicantsList from "./components/recruiter/ApplicantList";
+import EditProfile from "./pages/edit-profile";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 function App() {
   return (
+    
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
@@ -32,8 +37,9 @@ function App() {
          <Route path="/AddJob" element={<AddJob />} />
          <Route path="/ViewJobs" element={<ViewJobs />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/apply/:jobId" element={<ApplyForm />} />
-  <Route path="/recruiter/applications/:jobId" element={<JobApplications />} />
+  {/* <Route path="/recruiter/applications/:jobId" element={<JobApplications />} /> */}
         <Route
           path="/recruiter/RecruiterDashboard"
           element={

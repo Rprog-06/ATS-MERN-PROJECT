@@ -20,7 +20,7 @@ const Register = () => {
     try {
       await API.post("/auth/register", formData);
       alert("Registration successful");
-      navigate("/login");
+      navigate("/LoginPage");
     } catch (error) {
       alert(error.response?.data?.message || "Registration failed");
     }

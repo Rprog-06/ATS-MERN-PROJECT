@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 //import API from "../api/axiosInstance";
 const LoginPage = () => {
    const [user, setUser] = useState({ role: "" });
-  localStorage.setItem("user.role", user.role); // on successful login
+  //localStorage.setItem("user.role", user.role); // on successful login
  
 
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -22,9 +22,9 @@ const LoginPage = () => {
 
       // ✅ Save token and role to localStorage
       localStorage.setItem("token", token);
-      localStorage.setItem("user.role", user.role); 
+      localStorage.setItem("user", JSON.stringify(user)); 
       alert("Login successful");
-      navigate("/dashboard");
+      navigate("/Dashboard");
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
     }

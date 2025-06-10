@@ -5,7 +5,9 @@ import RecruiterApplicants from "../components/RecruiterApplicants";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const role = localStorage.getItem("user.role"); // Ensure this is set properly in localStorage
+ const user = JSON.parse(localStorage.getItem("user"));
+const role = user?.role || "";
+ // Ensure this is set properly in localStorage
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -32,7 +34,7 @@ const Dashboard = () => {
           Welcome back,{" "}
           <span className="text-indigo-600 capitalize">{role}</span> 👋
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="text-gray-600 text-lg">.
           Manage your job applications, resumes, and interview progress in one place.
         </p>
       </div>
@@ -95,7 +97,8 @@ const Dashboard = () => {
 )}
    
     <div className="max-w-6xl mx-auto">
-        {role === "recruiter" ? <RecruiterApplicants /> : <AppliedJobs />}
+      {role === "applicant" && <AppliedJobs />}
+  {/* {role === "recruiter" && <RecruiterApplicants />} */}
       </div>
     </div>
     

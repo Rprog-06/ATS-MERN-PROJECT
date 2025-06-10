@@ -10,7 +10,7 @@ const AppliedJobs = () => {
     const fetchApplications = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await API.get("applications/recruiter", {
+        const res = await API.get("applications/me", {
           headers: {  Authorization: `Bearer ${token}` },
         });
         setApplications(res.data);

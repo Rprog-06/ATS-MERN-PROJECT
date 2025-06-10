@@ -5,7 +5,7 @@ import API from "../../api";
 const RecruiterDashboard = () => {
   const [jobs, setJobs] = useState([]);
 
-  useEffect(() => {
+ 
     const fetchJobs = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -19,8 +19,22 @@ const RecruiterDashboard = () => {
       }
     };
 
-    fetchJobs();
-  }, []);
+   
+  ;
+  useEffect(() => {fetchJobs()}, []);
+  const handleDeleteJob = async (jobId) => {
+  if (!window.confirm("Are you sure you want to delete this job?")) return;
+
+  try {
+    const token = localStorage.getItem("token");
+    await API.delete(`/jobs/${jobId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    await fetchJobs(); // Refresh the jobs
+  } catch (err) {
+    console.error("Error deleting job", err);
+  }
+};
 
   return (
     <div className="max-w-5xl mx-auto p-6 bg-white rounded shadow">
@@ -45,8 +59,15 @@ const RecruiterDashboard = () => {
               >
                 View Applicants
               </Link>
+                 <button
+  className="bg-red-500 text-white px-3 py-1 rounded"
+  onClick={() => handleDeleteJob(job._id)}
+>
+  ❌ Delete
+</button>
             </div>
           ))}
+       
         </div>
       )}
       {/* ✅ Recruiter Only: View My Posted Jobs */}

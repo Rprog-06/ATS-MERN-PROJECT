@@ -66,7 +66,7 @@ const AddJob = () => {
 
   <textarea
     name="requirements"
-    placeholder="Job Requirements"
+    placeholder="Skills and Requirements"
     value={form.requirements}
     onChange={handleChange}
     className="w-full mb-4 p-2 border border-gray-300 rounded"
