@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const adminRoutes = require('./routes/admin');
 const appRoutes = require("./routes/applicantRoutes");
 //const connectDB = require('./config/db');
 require('dotenv').config();
@@ -53,6 +54,7 @@ app.use("/api/jobs", jobRoutes);
 
 // Static folder for resume uploads
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use('/api/admin', adminRoutes); // Admin routes
 //app.use('/uploads', express.static('uploads'));
 
 // Test route
@@ -71,3 +73,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
 });
+module.exports = app; // Export the app for testing

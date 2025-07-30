@@ -68,7 +68,21 @@ const AppliedJobs = () => {
                     }`}
                   >
                     Status: {app.applicationStatus}
+
                   </span>
+                  {app.firstRoundInterview && (
+  <div className="mt-2 p-2 border rounded bg-gray-50">
+    <strong>First Interview:</strong> {app.firstRoundInterview} <br />
+    <strong>Comment:</strong> {app.firstRoundInterviewComment || "No comment"}
+  </div>
+)}
+
+{app.secondRoundInterview && (
+  <div className="mt-2 p-2 border rounded bg-gray-50">
+    <strong>Second Interview:</strong> {app.secondRoundInterview} <br />
+    <strong>Comment:</strong> {app.secondRoundInterviewComment || "No comment"}
+  </div>
+)}
                 </motion.div>
               ))}
             </div>

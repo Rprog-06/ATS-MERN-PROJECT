@@ -37,8 +37,11 @@ router.delete("/:id", protect, authorizeRoles("recruiter"), async (req, res) => 
     const job = await Job.findById(req.params.id);
     if (!job) return res.status(404).json({ message: "Job not found" });
 
+    await Application.deleteMany({ job:{$exists:true,$eq:null} }); 
     await job.deleteOne();
+   
     res.status(200).json({ message: "Job deleted successfully" });
+
   } catch (error) {
     console.error("Error deleting job:", error);
     res.status(500).json({ message: "Server error" });

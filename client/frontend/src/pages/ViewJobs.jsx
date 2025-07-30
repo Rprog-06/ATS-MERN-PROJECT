@@ -44,10 +44,10 @@ const ViewJobs = () => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    console.log("📦 Stored User:", storedUser);
+   // console.log("📦 Stored User:", storedUser);
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-       console.log("✅ Parsed User:", parsedUser);
+      // console.log("✅ Parsed User:", parsedUser);
       setRole(parsedUser.role); // ✅ Set role in state
       if (parsedUser.role === "applicant") {
          console.log("🧾 Role is applicant. Fetching applied jobs...");
@@ -97,7 +97,7 @@ const ViewJobs = () => {
               >
                 <h3 className="text-xl font-semibold text-indigo-700">{job.title}</h3>
                 <p className="text-gray-600">{job.company} - {job.location}</p>
-                <p className="text-sm mt-2 text-gray-700">{job.description}</p>
+                <p className="text-sm mt-2 text-gray-700">{job.requirements}</p>
                 <p className="text-sm text-green-600 mt-1 font-semibold">Salary: {job.salary}</p>
 
                 {role === "applicant" && (

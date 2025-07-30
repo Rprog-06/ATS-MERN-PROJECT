@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import API from "../api";
+//import API from "../api";
 import { useNavigate } from "react-router-dom";
-//import API from "../api/axiosInstance";
+import API from "../api/axiosInstance";
 const LoginPage = () => {
    const [user, setUser] = useState({ role: "" });
   //localStorage.setItem("user.role", user.role); // on successful login

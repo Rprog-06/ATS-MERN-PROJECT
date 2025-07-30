@@ -15,8 +15,10 @@ import JobApplications from "./components/JobApplications";
 import RecruiterDashboard from "./components/recruiter/RecruiterDashboard";
 import ApplicantsList from "./components/recruiter/ApplicantList";
 import EditProfile from "./pages/edit-profile";
+import AdminDashboard from './pages/AdminDashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import HiredList from './components/hr/HiredList';
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
          <Route path="/AddJob" element={<AddJob />} />
          <Route path="/ViewJobs" element={<ViewJobs />} />
         <Route path="/Profile" element={<Profile />} />
@@ -50,6 +53,8 @@ function App() {
         />
         {/* Add a route for the applicants list */} 
 <Route path="/recruiter/Applicants/:jobId" element={<ApplicantsList />} />
+        <Route path="/HiredList" element={<HiredList />} />
+
 {/* <Route path="/Applications" element={<Applications />} /> */}
 
       </Routes>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import API from "../../api";
-//import API from "../api/axiosInstance";
+//import API from "../../api";
+import API from "../../api/axiosInstance"; // Adjust the path as necessary
 const RecruiterDashboard = () => {
   const [jobs, setJobs] = useState([]);
 

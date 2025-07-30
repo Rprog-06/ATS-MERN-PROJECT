@@ -100,8 +100,20 @@ const role = user?.role || "";
       {role === "applicant" && <AppliedJobs />}
   {/* {role === "recruiter" && <RecruiterApplicants />} */}
       </div>
+      {role === "admin" && (
+  <div className="bg-white rounded-2xl shadow-lg p-6 hover:scale-105 transition">
+    <h3 className="text-xl font-semibold text-slate-800 mb-2">🛠 Admin Panel</h3>
+    <p className="text-gray-600 mb-4">Monitor users, jobs, and applications.</p>
+    <button
+      onClick={() => navigate("/admin/dashboard")}
+      className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded"
+    >
+      Go to Admin
+    </button>
+  </div>
+)}
     </div>
-    
+   
   );
 };
 

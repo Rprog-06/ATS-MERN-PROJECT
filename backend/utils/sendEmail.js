@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const sendEmail = async (to, subject, text) => {
+const sendEmail = async (to, subject, text,attachmentPath) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -15,6 +15,10 @@ const sendEmail = async (to, subject, text) => {
     subject,
     text,
   };
+ if(attachmentPath){
+   mailOptions.attachments = [{ filename:"OfferLetter.pdf", path: attachmentPath,contentType:"application/pdf"  }];
+ } // Verifying the email account
+
 
   try {
     const info = await transporter.sendMail(mailOptions);

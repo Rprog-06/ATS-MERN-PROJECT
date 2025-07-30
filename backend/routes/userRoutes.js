@@ -24,11 +24,7 @@ router.post('/post', protect, authorizeRoles('recruiter'), asyncHandler(async (r
 // Profile Route - protected
 
 
-// Example of a protected recruiter-only route
-router.post('/post', protect, authorizeRoles('recruiter'), asyncHandler(async (req, res) => {
-  // your job posting logic here
-  res.status(201).json({ message: 'Job posted successfully' });
-}));
+
 
 // PUT /api/user/update
 router.put('/update', protect, asyncHandler(async (req, res) => {
