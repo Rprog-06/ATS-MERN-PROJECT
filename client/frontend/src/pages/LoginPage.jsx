@@ -36,7 +36,7 @@ const LoginPage = () => {
       <form onSubmit={handleSubmit} className="space-y-4">
         <input type="email" name="email" placeholder="Email" onChange={handleChange} className="w-full border p-2 rounded" />
         <input type="password" name="password" placeholder="Password" onChange={handleChange} className="w-full border p-2 rounded" />
-        <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded">Login</button>
+        <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded" name="submit">Login</button>
       </form>
     </div>
   );

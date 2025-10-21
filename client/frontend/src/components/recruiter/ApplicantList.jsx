@@ -355,7 +355,7 @@ const generateOffer = async (appId) => {
                   <td className="p-2 border">{app.gradMarks}</td>
                   <td className="p-2 border">
                     <a
-                      href={`https://ats-mern-project-5.onrender.com${app.resume}`}
+                      href={`http://localhost:5000${app.resume}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 underline"

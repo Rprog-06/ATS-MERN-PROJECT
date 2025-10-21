@@ -18,7 +18,7 @@ const app = express();
 //   credentials: true,
 // };
 
-app.use(cors({ origin: "*" ,  credentials: true, }));
+app.use(cors({ origin: "https://ats-mern-project-7h3x.vercel.app" ,  credentials: true, }));
 
 app.use(express.json());
 app.get('/', (req, res) => {
