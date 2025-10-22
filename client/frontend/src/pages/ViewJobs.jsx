@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
 const ViewJobs = () => {
@@ -28,7 +28,7 @@ const ViewJobs = () => {
         return;
       }
 
-      const res = await axios.get("/api/applications/me", {
+      const res = await API.get("/api/applications/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
 

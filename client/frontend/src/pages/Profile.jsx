@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
@@ -10,7 +10,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       const token = localStorage.getItem("token");
       try {
-        const res = await axios.get("http://localhost:5000/api/user/profile", {
+        const res = await API.get("/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(res.data);
