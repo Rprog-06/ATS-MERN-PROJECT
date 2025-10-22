@@ -18,12 +18,7 @@ const app = express();
 //   credentials: true,
 // };
 
-app.use(cors({
-  origin: true, // Reflects the request origin
-  credentials: true, // Allow cookies/auth
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['*'] // Allow all headers
-}));
+app.use(cors());
 
 app.use(express.json());
 app.get('/', (req, res) => {
