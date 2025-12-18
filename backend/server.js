@@ -23,7 +23,8 @@ app.use(
     origin: [
       "http://localhost:3000",
       "https://ats-mern-project-4tkp.vercel.app",
-      "https://ats-mern-project-4tkp-eblp77ye6-rprog-06s-projects.vercel.app"
+      "https://ats-mern-project-4tkp-eblp77ye6-rprog-06s-projects.vercel.app",
+      "https://ats-mern-project-8121.vercel.app"
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
