@@ -12,9 +12,9 @@ const ViewJobs = () => {
 
   const fetchJobs = async () => {
     try {
-      const res = await fetch("/jobs");
-      const data = await res.json();
-      setJobs(data);
+      const res = await API.get("/jobs");
+      // const data = await res.json();
+      setJobs(res.data);
     } catch (err) {
       console.error("Error fetching jobs", err);
     }
