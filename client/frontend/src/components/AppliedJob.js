@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import API from "../api"; // Adjust path if needed
+import API from "../api/axiosInstance"; // Adjust path if needed
 
 const AppliedJobs = () => {
   const [applications, setApplications] = useState([]);
