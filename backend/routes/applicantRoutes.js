@@ -331,9 +331,10 @@ const uploadCSV=require("../middleware/csvUpload")// assuming this exists
 router.post("/upload-aptitude-results", uploadCSV.single("file"), async (req, res) => {
   try {
     const results = await parseCSV(req.file.path); // [{ email, score }]
-    const cutoff = Number(req.body.cutoff || 60); 
-      const jobId = req.body.jobId;// default to 60 if not provided
-       
+    const cutoff = Number(req.body.cutoff || 60);
+    if (!email || isNaN(score)) continue; 
+      const {jobId} = req.params;// default to 60 if not provided
+       let updatedCount = 0;
 
     for (const result of results) {
       const email = result.email?.trim().toLowerCase();
@@ -348,25 +349,30 @@ router.post("/upload-aptitude-results", uploadCSV.single("file"), async (req, re
      const appStatus= score >= cutoff ? "aptitude test passed" : "aptitude test failed";
     // logStatus("aptitude test " ,status); // Log the status change
       // Log the status change
-     const app= await Applicant.findOneAndUpdate(
-        {  applicant: applicant._id,job:jobId },
-        {$set: { aptitudeTest: status,
-          aptitudeScore: score,
-        applicationStatus: appStatus,
-        },$push:{statusHistory: {
-        status: appStatus,
-        updatedAt: new Date(),
-      },
-    },
-  },
-        { new: true,
-           runValidators: false, 
-         }
-      );
+       const updated = await Applicant.findOneAndUpdate(
+          {
+            email: email,
+            job: jobId,
+          },
+          {
+            $set: {
+              aptitudeTest: status,
+              applicationStatus: appStatus,
+            },
+            $push: {
+              statusHistory: {
+                status: appStatus,
+                updatedAt: new Date(),
+              },
+            },
+          },
+          { new: true }
+        );
       console.log(
   "CSV update:",
   email,
   app ? "UPDATED" : "NOT FOUND");
+   if (updated) updatedCount++;
       // if(app){
       //   app.statusHistory.push({status:appStatus,updatedAt:new Date()});
       //   await app.save(); // Log the status change
