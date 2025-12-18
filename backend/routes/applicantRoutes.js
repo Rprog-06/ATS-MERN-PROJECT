@@ -341,10 +341,15 @@ router.post("/upload-aptitude-results", uploadCSV.single("file"), async (req, re
       // Log the status change
      const app= await Applicant.findOneAndUpdate(
         { email: result.email },
-        { aptitudeTest: status,
+        {$set: { aptitudeTest: status,
           aptitudeScore: score,
         applicationStatus: appStatus,
-        },
+        },$push:{statusHistory: {
+        status: appStatus,
+        updatedAt: new Date(),
+      },
+    },
+  },
         { new: true,
            runValidators: false, 
          }
