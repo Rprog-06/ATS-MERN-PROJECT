@@ -18,7 +18,7 @@ const sendEmail = async (to, subject, text,attachmentPath) => {
 
 
   const mailOptions = {
-    from: `"ATS App" <${process.env.BREVO_SMTP_USER}>`,
+    from: `"ATS App" <vahorarizwan09@gmail.com>`,
     to,
     subject,
     text,
