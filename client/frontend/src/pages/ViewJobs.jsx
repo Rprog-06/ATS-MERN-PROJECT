@@ -12,7 +12,7 @@ const ViewJobs = () => {
 
   const fetchJobs = async () => {
     try {
-      const res = await fetch("/api/jobs");
+      const res = await fetch("/jobs");
       const data = await res.json();
       setJobs(data);
     } catch (err) {
