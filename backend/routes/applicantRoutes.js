@@ -354,10 +354,10 @@ router.post("/upload-aptitude-results", uploadCSV.single("file"), async (req, re
            runValidators: false, 
          }
       );
-      if(app){
-        app.statusHistory.push({status:appStatus,updatedAt:new Date()});
-        await app.save(); // Log the status change
-      }
+      // if(app){
+      //   app.statusHistory.push({status:appStatus,updatedAt:new Date()});
+      //   await app.save(); // Log the status change
+      // }
     }
 
     res.status(200).json({ message: "Aptitude results updated based on cutoff." });
