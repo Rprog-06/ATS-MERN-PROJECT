@@ -332,7 +332,6 @@ router.post("/upload-aptitude-results", uploadCSV.single("file"), async (req, re
   try {
     const results = await parseCSV(req.file.path); // [{ email, score }]
     const cutoff = Number(req.body.cutoff || 60);
-    if (!email || isNaN(score)) continue; 
       const {jobId} = req.params;// default to 60 if not provided
        let updatedCount = 0;
 
