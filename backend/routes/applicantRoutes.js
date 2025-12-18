@@ -328,62 +328,68 @@ const fs = require("fs");
 const parseCSV = require("../utils/parseCSV"); 
 const uploadCSV=require("../middleware/csvUpload")// assuming this exists
 
-router.post("/upload-aptitude-results", uploadCSV.single("file"), async (req, res) => {
-  try {
-    const results = await parseCSV(req.file.path); // [{ email, score }]
-    const cutoff = Number(req.body.cutoff || 60);
-      const {jobId} = req.params;// default to 60 if not provided
-       let updatedCount = 0;
+router.post(
+  "/upload-aptitude-results/:jobId",
+  uploadCSV.single("file"),
+  async (req, res) => {
+    try {
+      const { jobId } = req.params;
+      const results = await parseCSV(req.file.path);
+      const cutoff = Number(req.body.cutoff || 60);
 
-    for (const result of results) {
-      const email = result.email?.trim().toLowerCase();
-      if (!email) continue;
-      const applicant = await Applicant.findOne({ email });
-        if (!applicant) {
-          console.log("CSV update:", email, "APPLICANT NOT FOUND");
-          continue;
-        }
-      const score = Number(result.score);
-      const status = score >= cutoff ? "Passed" : "Failed";
-     const appStatus= score >= cutoff ? "aptitude test passed" : "aptitude test failed";
-    // logStatus("aptitude test " ,status); // Log the status change
-      // Log the status change
-       const updated = await Applicant.findOneAndUpdate(
+      let updatedCount = 0;
+
+      for (const result of results) {
+        const email = result.email?.trim().toLowerCase();
+        const score = Number(result.score);
+
+        if (!email || isNaN(score)) continue;
+
+        const aptitudeStatus = score >= cutoff ? "Passed" : "Failed";
+        const applicationStatus =
+          score >= cutoff
+            ? "aptitude test passed"
+            : "aptitude test failed";
+
+        const updated = await Applicant.findOneAndUpdate(
           {
             email: email,
             job: jobId,
           },
           {
             $set: {
-              aptitudeTest: status,
-              applicationStatus: appStatus,
+              aptitudeTest: aptitudeStatus,
+              applicationStatus: applicationStatus,
             },
             $push: {
               statusHistory: {
-                status: appStatus,
+                status: applicationStatus,
                 updatedAt: new Date(),
               },
             },
           },
           { new: true }
         );
-      console.log(
-  "CSV update:",
-  email,
-  app ? "UPDATED" : "NOT FOUND");
-   if (updated) updatedCount++;
-      // if(app){
-      //   app.statusHistory.push({status:appStatus,updatedAt:new Date()});
-      //   await app.save(); // Log the status change
-      // }
-    }
 
-    res.status(200).json({ message: "Aptitude results updated based on cutoff." });
-  } catch (err) {
-    console.error("CSV Upload Error:", err);
-    res.status(500).json({ error: err.message });
+        console.log(
+          "CSV update:",
+          email,
+          updated ? "UPDATED" : "NOT FOUND"
+        );
+
+        if (updated) updatedCount++;
+      }
+
+      res.status(200).json({
+        message: `CSV processed. ${updatedCount} applicants updated.`,
+      });
+    } catch (err) {
+      console.error("CSV Upload Error:", err);
+      res.status(500).json({ error: err.message });
+    }
   }
-});
+);
+
 router.patch("/update-interview-result/:id", protect, authorizeRoles("recruiter"), async (req, res) => {
   const { round, result,comment } = req.body; // round = first | second, result = Passed | Failed
 
