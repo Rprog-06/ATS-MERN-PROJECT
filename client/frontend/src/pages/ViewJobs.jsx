@@ -28,7 +28,7 @@ const ViewJobs = () => {
         return;
       }
 
-      const res = await API.get("/api/applications/me", {
+      const res = await API.get("/applications/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
