@@ -9,13 +9,11 @@ const sendEmail = async (to, subject, text,attachmentPath) => {
     user: process.env.BREVO_SMTP_USER,
     pass: process.env.BREVO_SMTP_PASS,
   },
-     tls: {
-    rejectUnauthorized: false,
-  },
+    
   });
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from: `"ATS App" <${process.env.BREVO_SMTP_USER}>`,
     to,
     subject,
     text,
