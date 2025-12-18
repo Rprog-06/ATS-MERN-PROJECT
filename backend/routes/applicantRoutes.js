@@ -334,6 +334,7 @@ router.post("/upload-aptitude-results", uploadCSV.single("file"), async (req, re
     const cutoff = Number(req.body.cutoff || 60); // default to 60 if not provided
 
     for (const result of results) {
+      const email = result.email?.trim().toLowerCase(); 
       const score = Number(result.score);
       const status = score >= cutoff ? "Passed" : "Failed";
      const appStatus= score >= cutoff ? "aptitude test passed" : "aptitude test failed";
