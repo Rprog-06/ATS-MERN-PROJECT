@@ -13,6 +13,9 @@ const sendEmail = async (to, subject, text,attachmentPath) => {
     greetingTimeout: 10000,
     
   });
+  await transporter.verify();
+  console.log("✅ Brevo SMTP verified");
+
 
   const mailOptions = {
     from: `"ATS App" <${process.env.BREVO_SMTP_USER}>`,
