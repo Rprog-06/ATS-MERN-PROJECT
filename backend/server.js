@@ -22,7 +22,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://ats-mern-project-7h3x.vercel.app/"
+      "https://ats-mern-project-4tkp.vercel.app/"
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
