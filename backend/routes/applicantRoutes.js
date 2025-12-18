@@ -354,6 +354,10 @@ router.post("/upload-aptitude-results", uploadCSV.single("file"), async (req, re
            runValidators: false, 
          }
       );
+      console.log(
+  "CSV update:",
+  email,
+  updated ? "UPDATED" : "NOT FOUND");
       // if(app){
       //   app.statusHistory.push({status:appStatus,updatedAt:new Date()});
       //   await app.save(); // Log the status change
