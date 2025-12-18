@@ -338,13 +338,18 @@ router.post("/upload-aptitude-results", uploadCSV.single("file"), async (req, re
     for (const result of results) {
       const email = result.email?.trim().toLowerCase();
       if (!email) continue;
+      const applicant = await Applicant.findOne({ email });
+        if (!applicant) {
+          console.log("CSV update:", email, "APPLICANT NOT FOUND");
+          continue;
+        }
       const score = Number(result.score);
       const status = score >= cutoff ? "Passed" : "Failed";
      const appStatus= score >= cutoff ? "aptitude test passed" : "aptitude test failed";
     // logStatus("aptitude test " ,status); // Log the status change
       // Log the status change
      const app= await Applicant.findOneAndUpdate(
-        { email,job:jobId },
+        {  applicant: applicant._id,job:jobId },
         {$set: { aptitudeTest: status,
           aptitudeScore: score,
         applicationStatus: appStatus,

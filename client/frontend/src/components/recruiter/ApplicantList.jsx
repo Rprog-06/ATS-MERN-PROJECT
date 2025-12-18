@@ -179,6 +179,7 @@ const ApplicantsList = () => {
       const formData = new FormData();
       formData.append("file", csvFile);
       formData.append("cutoff", cutoff); // Append cutoff value
+      formData.append("jobId", jobId);
 
       const res = await API.post("/applications/upload-aptitude-results", formData, {
         headers: {
