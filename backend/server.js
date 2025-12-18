@@ -22,7 +22,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://ats-mern-project-4tkp.vercel.app"
+      "https://ats-mern-project-4tkp.vercel.app",
+      "https://ats-mern-project-4tkp-eblp77ye6-rprog-06s-projects.vercel.app"
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
@@ -54,7 +55,7 @@ const authRoutes = require('./routes/auth');
 //     res.sendFile(path.join(buildDir, 'index.html'));
 //   });
 // }
-app.use("/api", appRoutes);
+// app.use("/api", appRoutes);
 // Use Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes); 
