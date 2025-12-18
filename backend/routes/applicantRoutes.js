@@ -331,17 +331,20 @@ const uploadCSV=require("../middleware/csvUpload")// assuming this exists
 router.post("/upload-aptitude-results", uploadCSV.single("file"), async (req, res) => {
   try {
     const results = await parseCSV(req.file.path); // [{ email, score }]
-    const cutoff = Number(req.body.cutoff || 60); // default to 60 if not provided
+    const cutoff = Number(req.body.cutoff || 60); 
+      const jobId = req.body.jobId;// default to 60 if not provided
+       
 
     for (const result of results) {
-      const email = result.email?.trim().toLowerCase(); 
+      const email = result.email?.trim().toLowerCase();
+      if (!email) continue;
       const score = Number(result.score);
       const status = score >= cutoff ? "Passed" : "Failed";
      const appStatus= score >= cutoff ? "aptitude test passed" : "aptitude test failed";
     // logStatus("aptitude test " ,status); // Log the status change
       // Log the status change
      const app= await Applicant.findOneAndUpdate(
-        {applicantEmail: email },
+        { email,job:jobId },
         {$set: { aptitudeTest: status,
           aptitudeScore: score,
         applicationStatus: appStatus,
