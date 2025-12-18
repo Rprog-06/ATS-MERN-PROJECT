@@ -345,7 +345,9 @@ router.post("/upload-aptitude-results", uploadCSV.single("file"), async (req, re
           aptitudeScore: score,
         applicationStatus: appStatus,
         },
-        { new: true }
+        { new: true,
+           runValidators: false, 
+         }
       );
       if(app){
         app.statusHistory.push({status:appStatus,updatedAt:new Date()});
