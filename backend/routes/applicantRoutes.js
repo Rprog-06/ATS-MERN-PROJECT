@@ -8,7 +8,7 @@ const { authorizeRoles } = require('../middleware/roleMiddleware');
 const sendEmail = require("../utils/sendEmail"); // Import this at the top
 const parseResumeAndScore = require("../utils/resumeParser"); // Import the resume parser utility
 const path=require('path');
-
+const mongoose = require("mongoose");
 
 // Import the necessary controller functions
 
