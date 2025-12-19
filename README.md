@@ -8,12 +8,16 @@ A full-stack SaaS-style Application Tracking System designed to manage job posti
 
 🧪 Demo Credentials (for evaluation only)
 
-Applicant
-
+Applicant:
+{
 Email: vahorarizwan09@gmail.com
 
 Password: ert
-
+}
+Recruiter:{
+Email:rizwanvahora25@gmail.com
+Password:Rizwan@25
+}
 ⚠️ Demo account is read-only and for evaluation purposes only.
 
 🚀 Key Features
