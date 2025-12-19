@@ -334,6 +334,7 @@ router.post(
   async (req, res) => {
     try {
       const { jobId } = req.params;
+      const jobObjectId=new mongoose.Types.ObjectId(jobId);
       const results = await parseCSV(req.file.path);
       const cutoff = Number(req.body.cutoff || 60);
 
@@ -353,8 +354,8 @@ router.post(
 
         const updated = await Applicant.findOneAndUpdate(
           {
-            email: email,
-            job: jobId,
+            email: {$regex:`^${email}$`, $options: 'i' },
+            job: jobObjectId,
           },
           {
             $set: {
