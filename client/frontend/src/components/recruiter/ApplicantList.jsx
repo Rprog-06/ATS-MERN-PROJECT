@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 
 
 const ApplicantsList = () => {
+  const BACKEND_URL =
+  process.env.REACT_APP_API_BASE_URL?.replace("/api", "") ||
+  "https://ats-mern-project-5.onrender.com";
   const { jobId } = useParams();
   const [applicants, setApplicants] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -354,9 +357,10 @@ const generateOffer = async (appId) => {
                   <td className="p-2 border">{app.marks10}</td>
                   <td className="p-2 border">{app.marks12}</td>
                   <td className="p-2 border">{app.gradMarks}</td>
+
                   <td className="p-2 border">
                     <a
-                      href={`http://localhost:5000${app.resume}`}
+                      href={`${BACKEND_URL}${app.resume}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 underline"
