@@ -174,7 +174,7 @@ const ApplicantsList = () => {
 
   // Function to handle uploading the CSV file
   const handleCSVUpload = async () => {
-    try {
+    try {                                                 //Added
       const token = localStorage.getItem("token");
       const formData = new FormData();
       formData.append("file", csvFile);
