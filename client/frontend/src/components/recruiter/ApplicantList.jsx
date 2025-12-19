@@ -181,7 +181,7 @@ const ApplicantsList = () => {
       formData.append("cutoff", cutoff); // Append cutoff value
       // formData.append("jobId", jobId);
 
-      const res = await API.post("/applications/upload-aptitude-results/${jobId}", formData, {
+      const res = await API.post(`/applications/upload-aptitude-results/${jobId}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
