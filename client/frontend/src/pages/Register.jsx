@@ -37,7 +37,6 @@ const Register = () => {
         <select name="role" onChange={handleChange} className="w-full border p-2 rounded">
           <option value="applicant">Applicant</option>
           <option value="recruiter">Recruiter</option>
-          <option value="admin">Admin</option>
         </select>
         <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Register</button>
       </form>
